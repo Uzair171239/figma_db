@@ -24,7 +24,7 @@ const postSchema = mongoose.Schema({
         required: true
     },
     D_O_B: {
-        type: Date,
+        type: String,
         required: true
     },
     phone: {

@@ -17,9 +17,9 @@ router.post('/',async (req, res) => {
         image: req.body.image,
         name: req.body.name,
         password: req.body.password,
-        email:req.body.email,
-        adrress:req.body.adrress,
-        D_O_B:req.body.D_O_B,
+        email: req.body.email,
+        adrress: req.body.adrress,
+        D_O_B: Date.parse(req.body.D_O_B),
         phone:req.body.phone,
     });
     const savedPost = await post.save();
