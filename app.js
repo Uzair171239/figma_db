@@ -7,11 +7,23 @@ const professionalRoute = require('./routes/prof_info');
 const skillsRoute = require('./routes/skills_info'); 
 const homeRoute = require('./routes/home_info'); 
 let port = process.env.PORT || 3001;
+const cors = require('cors');
 
 app.use(express.json());
 app.use(express.urlencoded({
     extended:true,
 }));
+
+app.use(cors(function(req, res, next){
+    res.header("Access-control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-with, Content-Type, Accept, Authorization"
+    );
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,DELETE',);
+    next();
+}
+));
 
 app.use('/personal', personalRoute);
 app.use('/personal/professional', professionalRoute);
