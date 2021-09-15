@@ -17,6 +17,7 @@ const postSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique : true
     },
     D_O_B: {
         type: Date,
