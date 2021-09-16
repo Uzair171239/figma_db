@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Accept');
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
@@ -38,13 +38,6 @@ app.use('/personal', personalRoute);
 app.use('/personal/professional', professionalRoute);
 app.use('/personal/professional/skills', skillsRoute);
 app.use('/login', loginRoute);
-app.use('/login/dashboard',authenticateToken, async (req, res) => {
-        try{
-            res.json('hello '+ req.user);
-       }catch(err){
-           res.json( {message: err});
-       }
-    });
 
 app.use('/', homeRoute);
 
@@ -56,16 +49,3 @@ mongoose.connect(process.env.DB_CONNECTION, () => {
 app.listen(port, () => {
     console.log(`the listening port is http://localhost:${port}`);
 });
-
-function authenticateToken(req, res, next) {
-        const authHeader = req.headers['authorization'];
-        const token = authHeader && authHeader.split(' ')[1];
-    
-        if(token == null) return res.sendStatus(401);
-        
-        jwt.verify(token, process.env.SECRET_TOKEN, (err, user) => {
-            if(err) return res.sendStatus(403)
-            req.user = user
-            next();
-        })
-    }
