@@ -8,11 +8,7 @@ const { response } = require('express');
 
 router.get('/dashboard',authenticateToken, async (req, res) => {
     try{
-        // const user = await personal.findOne({ email });
-        
-        // if(user == null) return res.status(404).send('Record not found');
-        
-        res.json('hello '+ req.user.username);
+        res.json('hello '+ req.user);
    }catch(err){
        res.json( {message: err});
    }
@@ -24,9 +20,9 @@ router.post('/',async (req, res) => {
         // res.send(user);
         // if (user && (await bcrypt.compare(  user.password )))
         if(user){
-            const accessToken = jwt.sign(user.password, process.env.SECRET_TOKEN);
-            return(accessToken);
-            // res.send(accessToken);
+            const accessToken = jwt.sign(user.email, process.env.SECRET_TOKEN);
+            // return(accessToken);
+            return accessToken;
         }
         else 
             res.json('username or password is incorrect');
