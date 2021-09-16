@@ -12,7 +12,7 @@ router.get('/dashboard',authenticateToken, async (req, res) => {
         
         // if(user == null) return res.status(404).send('Record not found');
         
-        res.json('hello '+ req.email);
+        res.json('hello '+ req.user.username);
    }catch(err){
        res.json( {message: err});
    }
