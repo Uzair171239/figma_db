@@ -38,6 +38,13 @@ app.use('/personal', personalRoute);
 app.use('/personal/professional', professionalRoute);
 app.use('/personal/professional/skills', skillsRoute);
 app.use('/login', loginRoute);
+app.use('/login/dashboard',authenticateToken, async (req, res) => {
+        try{
+            res.json('hello '+ req.user);
+       }catch(err){
+           res.json( {message: err});
+       }
+    });
 
 app.use('/', homeRoute);
 
@@ -49,3 +56,16 @@ mongoose.connect(process.env.DB_CONNECTION, () => {
 app.listen(port, () => {
     console.log(`the listening port is http://localhost:${port}`);
 });
+
+function authenticateToken(req, res, next) {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+    
+        if(token == null) return res.sendStatus(401);
+        
+        jwt.verify(token, process.env.SECRET_TOKEN, (err, user) => {
+            if(err) return res.sendStatus(403)
+            req.user = user
+            next();
+        })
+    }

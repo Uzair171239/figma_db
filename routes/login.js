@@ -6,13 +6,13 @@ const jwt = require('jsonwebtoken');
 const { response } = require('express');
 // const auth = require('./authentication');
 
-router.get('/dashboard',authenticateToken, async (req, res) => {
-    try{
-        res.json('hello '+ req.user);
-   }catch(err){
-       res.json( {message: err});
-   }
-});
+// router.get('/dashboard',authenticateToken, async (req, res) => {
+//     try{
+//         res.json('hello '+ req.user);
+//    }catch(err){
+//        res.json( {message: err});
+//    }
+// });
 
 router.post('/',async (req, res) => {
     try{
