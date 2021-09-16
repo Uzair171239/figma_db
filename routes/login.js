@@ -22,7 +22,7 @@ router.post('/',async (req, res) => {
         if(user){
             const accessToken = jwt.sign(user.email, process.env.SECRET_TOKEN);
             // return(accessToken);
-            return accessToken;
+            res.json(accessToken);
         }
         else 
             res.json('username or password is incorrect');
