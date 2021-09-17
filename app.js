@@ -5,7 +5,7 @@ require('dotenv/config'); // for hiding database username and password
 const personalRoute = require('./routes/pers_info'); 
 const professionalRoute = require('./routes/prof_info'); 
 const skillsRoute = require('./routes/skills_info'); 
-const homeRoute = require('./routes/home_info'); 
+// const homeRoute = require('./routes/home_info'); 
 const loginRoute = require('./routes/login'); 
 // const dashboardRoute = require('./routes/dashboard'); 
 let port = process.env.PORT || 3001;
@@ -41,7 +41,7 @@ app.use('/personal/professional/skills', skillsRoute);
 app.use('/login', loginRoute);
 // app.use('/dashboard', dashboardRoute);
 
-app.use('/', homeRoute);
+// app.use('/', homeRoute);
 
 // connect to db
 mongoose.connect(process.env.DB_CONNECTION, () => {
