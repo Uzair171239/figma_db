@@ -1,6 +1,7 @@
 const express = require('express');
 const personal = require('../models/personal');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 router.get('/', async (req, res) => {
     try{
@@ -12,11 +13,14 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/',async (req, res) => {
+    const hashPassword = bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+        res.send(err);
+    });
     try{
     const post = new personal({
         image: req.body.image,
         name: req.body.name,
-        password: req.body.password,
+        password: hashPassword,
         email: req.body.email,
         address: req.body.address,
         D_O_B: Date.parse(req.body.D_O_B),
