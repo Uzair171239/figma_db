@@ -2,6 +2,7 @@ const express = require('express');
 const personal = require('../models/personal');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+require('dotenv/config');
 
 router.get('/', async (req, res) => {
     try{
@@ -13,14 +14,12 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/',async (req, res) => {
-    const hashPassword = bcrypt.hash(req.body.password, saltRounds, function(err) {
-        res.send(err);
-    });
+    const passwordHash = bcrypt.hashSync(req.body.password, 10);
     try{
     const post = new personal({
         image: req.body.image,
         name: req.body.name,
-        password: hashPassword,
+        password: passwordHash,
         email: req.body.email,
         address: req.body.address,
         D_O_B: Date.parse(req.body.D_O_B),
