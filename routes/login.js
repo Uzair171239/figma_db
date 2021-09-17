@@ -17,13 +17,12 @@ router.get('/dashboard',authenticateToken, async (req, res) => {
 });
 
 router.post('/',async (req, res) => {
-
     try{
-        const hashPassword = bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+        const hashPassword =  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
             res.send(err);
         });
-        const user = await personal.findOne({ email: req.body.email, password: hashPassword });;
-        if (user && (await bcrypt.compare(  user.password )))
+        const user = await personal.findOne({ email: req.body.email, password: hashPassword });
+        // if (user && (await bcrypt.compare(  user.password )))
         if(user){
             const accessToken = jwt.sign(user.email, process.env.SECRET_TOKEN);
             // return(accessToken);

@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/',async (req, res) => {
-    const hashPassword = bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    const hashPassword = bcrypt.hash(req.body.password, saltRounds, function(err) {
         res.send(err);
     });
     try{
