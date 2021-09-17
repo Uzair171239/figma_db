@@ -3,7 +3,7 @@ const personal = require('../models/personal');
 const router = express.Router();
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
-// const { response } = require('express');
+const { response } = require('express');
 // const auth = require('./authentication');
 
 router.get('/dashboard',authenticateToken, async (req, res) => {
