@@ -19,5 +19,8 @@
   },
   "engines": {
     "node": "14.15.5"
+  },
+  "devDependencies": {
+    "@aws-amplify/cli": "^5.6.0"
   }
 }
