@@ -4,8 +4,8 @@ const router = express.Router();
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { response } = require('express');
-const bcrypt = require('bcrypt');
-// const auth = require('./authentication');
+// const bcrypt = require('bcrypt');
+const auth = require('./authentication');
 
 router.get('/dashboard',authenticateToken, async (req, res) => {
     try{
@@ -18,7 +18,7 @@ router.get('/dashboard',authenticateToken, async (req, res) => {
 router.post('/',async (req, res) => {
     try{
         const user = await personal.findOne({ email: req.body.email});
-        if (user &&  bcrypt.compare(req.body.password,  user.password )){
+        if (user){
             const accessToken = jwt.sign(user.email, process.env.SECRET_TOKEN);
             // return(accessToken);
             res.json(accessToken);

@@ -19,10 +19,10 @@ app.use(express.urlencoded({
 
 app.use(cors());
 
-app.use('/personal', personalRoute);
-app.use('/personal/professional', professionalRoute);
-app.use('/personal/professional/skills', skillsRoute);
-app.use('/login', loginRoute);
+// app.use('/personal', personalRoute);
+// app.use('/personal/professional', professionalRoute);
+// app.use('/personal/professional/skills', skillsRoute);
+// app.use('/login', loginRoute);
 app.use("iotTest", IOT)
 app.get("/test", (req, res) => {
     res.send({
