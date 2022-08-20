@@ -23,7 +23,7 @@ app.use(cors());
 // app.use('/personal/professional', professionalRoute);
 // app.use('/personal/professional/skills', skillsRoute);
 // app.use('/login', loginRoute);
-app.use("iotTest", IOT)
+app.use("/iotTest", IOT)
 app.get("/", (req, res) => {
     res.json.send({
         message: "Hello World"
